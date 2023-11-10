@@ -14,30 +14,34 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    @foreach(var line in Model?.Lines){
-                    <tr>
-                        <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">@line.Product.ProductName</td>
-                        <td class="align-middle">$@(line.Product.ProductPrice * (1 - line.Product.ProductDiscount))</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                        <a href="/Cart/DecreaseCart/?productId=@line.Product.ProductId" class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </a>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="@line.Quantity">
-                                <div class="input-group-btn">
-                                        <a href="/Cart/AddToCart/?productId=@line.Product.ProductId" class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </td>
-                            <td class="align-middle">$@(line.Product.ProductPrice * (1 - line.Product.ProductDiscount) * line.Quantity)</td>
-                            <td class="align-middle"><a href="/Cart/RemoveFromCart/?productId=@line.Product.ProductId" class="btn btn-sm btn-primary">
-                                <i class="fa fa-times"></i></a>
-                            </td>
-                    </tr>
+                    @if (Model != null && Model.Lines != null)
+                    {
+                        @foreach (var line in Model?.Lines)
+                        {
+                            <tr>
+                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">@line.Product.ProductName</td>
+                                <td class="align-middle">$@(line.Product.ProductPrice * (1 - line.Product.ProductDiscount))</td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <a href="/Cart/DecreaseCart/?productId=@line.Product.ProductId" class="btn btn-sm btn-primary btn-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </a>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm bg-secondary text-center" value="@line.Quantity">
+                                        <div class="input-group-btn">
+                                            <a href="/Cart/AddToCart/?productId=@line.Product.ProductId" class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">$@(line.Product.ProductPrice * (1 - line.Product.ProductDiscount) * line.Quantity)</td>
+                                <td class="align-middle"><a href="/Cart/RemoveFromCart/?productId=@line.Product.ProductId" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>

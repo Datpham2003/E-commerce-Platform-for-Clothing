@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Create";
 }
+<script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
 <h1>Create</h1>
 
@@ -73,3 +74,14 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    ClassicEditor
+        .create(document.querySelector('#ProductDescription'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>

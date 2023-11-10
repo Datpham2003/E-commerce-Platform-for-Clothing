@@ -115,7 +115,17 @@
                                     <a href="/Cart/CheckOut" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Products Management</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="/Products/Create" class="dropdown-item">Add Product</a>
+                                        <a href="/Products/Edit" class="dropdown-item">Edit Product</a>
+                                        <a href="/Products/Delete" class="dropdown-item">Delete Product</a>
+                                    </div>
+                                </div>
+                            }
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <partial name="_LoginPartial" />

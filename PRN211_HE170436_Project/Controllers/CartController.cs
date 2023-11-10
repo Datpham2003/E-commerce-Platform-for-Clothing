@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PRN211_HE170436_Project.Data;
 using PRN211_HE170436_Project.Infrastructure;
 using PRN211_HE170436_Project.Models;
@@ -19,6 +20,7 @@ namespace PRN211_HE170436_Project.Controllers
         {
             return View("Cart", HttpContext.Session.getJson<Cart>("Cart"));
         }
+        [Authorize]
         public IActionResult AddToCart(int productID)
         {
             Product? product = _context.Products.FirstOrDefault(p => p.ProductId == productID);
@@ -29,7 +31,7 @@ namespace PRN211_HE170436_Project.Controllers
             }
             return View("Cart", Cart);
         }
-
+        [Authorize]
         public IActionResult DecreaseCart(int productID)
         {
             Product? product = _context.Products.FirstOrDefault(p => p.ProductId == productID);
@@ -41,7 +43,7 @@ namespace PRN211_HE170436_Project.Controllers
             }
             return View("Cart", Cart);
         }
-
+        [Authorize]
         public IActionResult RemoveFromCart(int productID)
         {
             Product? product = _context.Products.FirstOrDefault(p => p.ProductId == productID);

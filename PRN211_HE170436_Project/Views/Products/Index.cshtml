@@ -126,32 +126,8 @@
         <!-- Shop Sidebar End -->
         <!-- Shop Product Start -->
         <div class="col-lg-9 col-md-12">
-            <div class="row pb-3">
-                <div class="col-12 pb-1">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <form action="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search by name">
-                                <div class="input-group-append">
-                                    <span class="input-group-text bg-transparent text-primary">
-                                        <i class="fa fa-search"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </form>
-                        <div class="dropdown ml-4">
-                            <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                Sort by
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                <a class="dropdown-item" href="#">Latest</a>
-                                <a class="dropdown-item" href="#">Popularity</a>
-                                <a class="dropdown-item" href="#">Best Rating</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row pb-3" id="filtered-products">
+                
                 @foreach(var item in Model.Products){
                 <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                     <div class="card product-item border-0 mb-4">
@@ -204,14 +180,14 @@
         var colors = getSelectedFormCheckBox("color-filter-form");
         var sizes = getSelectedFormCheckBox("size-filter-form");
         var data = {
-            PriceRange: priceRange,
+            PriceRanges: priceRange,
             Colors: colors,
             Sizes: sizes
         }
         fetch("/Products/GetFilteredProducts", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type":"application/json"
             },
             body: JSON.stringify(data)
         }).then(function (response) {
@@ -220,10 +196,58 @@
             } else {
                 throw new Error("Error Sending Request")
             }
-        }).catch(function (error) {
-            console.log("An error occured: ", error)
+        }).then(function (results) {
+            $("#filtered-products").html(results);
+            var TotalItems = document.querySelectorAll(".col-lg-4");
+            var PageSize = 9;
+            var TotalPages = Math.ceil(TotalItems.length / PageSize);
+            const div = document.createElement("div");
+            div.classList.add("col-12", "pb-1");
+            const nav = document.createElement("nav");
+            nav.classList.add("col-12", "pb-1");
+            const ul = document.createElement("ul");
+            ul.classList.add("pagination justify-content-center", "mb-3");
+            for (var i = 1; i <= TotalPages; i++) {
+                var li = document.createElement("li");
+                li.classList.add("page-item");
+                var a = document.createElement("a");
+                a.classList.add("page-link");
+                a.innerHTML = i;
+                a.addEventListener('click', handlePageLinkClick)
+                a.setAttribute("href","#");
+
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+            nav.appendChild(ul);
+            div.appendChild(nav);
+            document.getElementById("filtered-products").appendChild(div);
+            ShowPage(i);
+        })
+        .catch(function (error) {
+        console.log("An error occured: ", error)
+
         })
     })
+    function handlePageLinkClick(event){
+        event.prevenDefault();
+
+        var pageNumber = parseInt(event.target.textContext);
+        ShowPage(pageNumber);
+    }
+    function ShowPage(pageNumber) {
+        var productItems = document.querySelectorAll(".col-lg-4");
+        var itemsPerPage = 9;
+        var startIndex = (pageNumber - 1) * itemsPerPage;
+        var endIndex = startIndex * itemsPerPage;
+        for (var i = 0; i < productItems.length;i++) {
+            if (i >= startIndex && i < endIndex) {
+                productItems[i].style.display = 'block';
+            } else {
+                productItems[i].style.display = 'none';
+            }
+        }
+    }
 
     function getSelectedFormCheckBox(formID) {
         var checkboxs = $('#' + formID + ' input[type="checkbox"]:checked');

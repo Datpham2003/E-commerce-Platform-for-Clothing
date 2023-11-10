@@ -1,0 +1,84 @@
+﻿@model PRN211_HE170436_Project.Models.Billing
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Billing</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BillingId" />
+            <div class="form-group">
+                <label asp-for="BillingFistName" class="control-label"></label>
+                <input asp-for="BillingFistName" class="form-control" />
+                <span asp-validation-for="BillingFistName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingLastName" class="control-label"></label>
+                <input asp-for="BillingLastName" class="form-control" />
+                <span asp-validation-for="BillingLastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingEmail" class="control-label"></label>
+                <input asp-for="BillingEmail" class="form-control" />
+                <span asp-validation-for="BillingEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingPhone" class="control-label"></label>
+                <input asp-for="BillingPhone" class="form-control" />
+                <span asp-validation-for="BillingPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingAddress1" class="control-label"></label>
+                <input asp-for="BillingAddress1" class="form-control" />
+                <span asp-validation-for="BillingAddress1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingAddress2" class="control-label"></label>
+                <input asp-for="BillingAddress2" class="form-control" />
+                <span asp-validation-for="BillingAddress2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingCountry" class="control-label"></label>
+                <input asp-for="BillingCountry" class="form-control" />
+                <span asp-validation-for="BillingCountry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingCity" class="control-label"></label>
+                <input asp-for="BillingCity" class="form-control" />
+                <span asp-validation-for="BillingCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingState" class="control-label"></label>
+                <input asp-for="BillingState" class="form-control" />
+                <span asp-validation-for="BillingState" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BillingPostalCode" class="control-label"></label>
+                <input asp-for="BillingPostalCode" class="form-control" />
+                <span asp-validation-for="BillingPostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductId" class="control-label"></label>
+                <input asp-for="ProductId" class="form-control" />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -22,6 +22,12 @@ namespace PRN211_HE170436_Project.Controllers
             public int Min { get; set;}
             public int Max { get; set;}
         }
+
+        public class Color
+        {
+            public int Min { get; set; }
+            public int Max { get; set; }
+        }
         public ProductsController(ApplicationDbContext context)
         {
             _context = context;

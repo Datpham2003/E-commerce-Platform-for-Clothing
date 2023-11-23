@@ -146,7 +146,7 @@ namespace PRN211_HE170436_Project.Controllers
         }
 
         // GET: Products/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "CategoryName");
@@ -160,7 +160,7 @@ namespace PRN211_HE170436_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("ProductId,ProductName,ProductDescription,CategoryId,ProductPrice,ProductDiscount,ProductImage,SizeId,ColorId,IsTrendy,IsArrived")] Product product)
         {
             if (ModelState.IsValid)
@@ -176,7 +176,7 @@ namespace PRN211_HE170436_Project.Controllers
         }
 
         // GET: Products/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Products == null)
@@ -200,7 +200,7 @@ namespace PRN211_HE170436_Project.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("ProductId,ProductName,ProductDescription,CategoryId,ProductPrice,ProductDiscount,ProductImage,SizeId,ColorId,IsTrendy,IsArrived")] Product product)
         {
             if (id != product.ProductId)
@@ -235,7 +235,7 @@ namespace PRN211_HE170436_Project.Controllers
         }
 
         // GET: Products/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Products == null)
@@ -259,7 +259,7 @@ namespace PRN211_HE170436_Project.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Products == null)
